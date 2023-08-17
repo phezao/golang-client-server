@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Cotacao struct {
@@ -48,7 +48,7 @@ func main() {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/cotacao")
+	db, err := sql.Open("sqlite3", "./cotacao.db")
 	if err != nil {
 		panic(err)
 	}
